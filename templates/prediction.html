@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Demand Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="result-container">
+
+        <h1>🤖 Demand Prediction</h1>
+
+        <div class="result-card">
+
+            <h2>{{ food_name }}</h2>
+
+            {% if prediction is none %}
+
+                <p>
+                    No previous consumption data is available
+                    for this food.
+                </p>
+
+                <div class="warning-message">
+                    📊 Add some food entries first to generate
+                    a demand prediction.
+                </div>
+
+            {% else %}
+
+                <p>
+                    Based on previous consumption records:
+                </p>
+
+                <h2>
+                    Recommended quantity:
+                    {{ prediction }} meals
+                </h2>
+
+                <div class="success-message">
+                    📊 This prediction can help reduce
+                    over-preparation and unnecessary food waste.
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <a href="/" class="btn">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Recipient Matching</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="result-container">
+
+        <h1>🤝 Smart Recipient Matching</h1>
+
+
+        <div class="result-card">
+
+            <h2>{{ food_name }}</h2>
+
+            <p>
+                <strong>Available Surplus:</strong>
+                {{ surplus }} meals
+            </p>
+
+            <div class="success-message">
+                {{ message }}
+            </div>
+
+        </div>
+
+
+        {% if recipients %}
+
+            <h2 class="recipient-heading">
+                Suitable Recipients
+            </h2>
+
+
+            {% for recipient in recipients %}
+
+                <div class="result-card recipient-card">
+
+                    <h2>
+                        🏢 {{ recipient.name }}
+                    </h2>
+
+                    <p>
+                        <strong>Type:</strong>
+                        {{ recipient.type }}
+                    </p>
+
+                    <p>
+                        <strong>Capacity:</strong>
+                        {{ recipient.capacity }} meals
+                    </p>
+
+                    <button class="match-button">
+                        Match Food
+                    </button>
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        <a href="/" class="btn">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+
+</html>

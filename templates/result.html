@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Food Analysis</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="result-container">
+
+        <h1>Food Analysis 🌱</h1>
+
+        <div class="result-card">
+
+            <h2>{{ food_name }}</h2>
+
+            <p>
+                <strong>Quantity Prepared:</strong>
+                {{ prepared }}
+            </p>
+
+            <p>
+                <strong>Quantity Consumed:</strong>
+                {{ consumed }}
+            </p>
+
+            <p>
+                <strong>Surplus Food:</strong>
+                {{ surplus }}
+            </p>
+
+            {% if surplus > 0 %}
+
+                <div class="success-message">
+                    🍱 Surplus detected!
+                    <br>
+                    This food can potentially be redistributed.
+                </div>
+
+            {% else %}
+
+                <div class="success-message">
+                    ✅ No surplus food detected.
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <a href="/" class="btn">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+
+</html>

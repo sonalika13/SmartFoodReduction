@@ -2,3 +2,4 @@
 __pycache__/
 *.pyc
 .env
+food_data.db

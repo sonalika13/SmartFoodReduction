@@ -1,18 +1,453 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Smart Food Reduction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
 
-    <h1>🌱 Smart Food Reduction</h1>
 
-    <h2>Reduce Food Waste • Predict Demand • Redistribute Surplus</h2>
+<!-- Navigation -->
 
-    <p>Welcome to the Smart Food Reduction system.</p>
+<nav class="navbar">
 
-    <button>Get Started</button>
+    <div class="logo">
+        🌱 SmartFood
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="#dashboard">Dashboard</a>
+
+        <a href="#features">Features</a>
+
+        <a href="#food-entry">Add Food</a>
+
+        <a href="#prediction">Prediction</a>
+
+        <a href="#matching">Matching</a>
+
+        <a href="#about">About</a>
+
+    </div>
+
+</nav>
+
+
+<!-- Hero Section -->
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1>
+            Reduce Food Waste.
+            <span>Feed More.</span>
+        </h1>
+
+        <p>
+            Smart Food Reduction uses data-driven demand
+            prediction, surplus monitoring and intelligent
+            food redistribution to reduce avoidable food waste.
+        </p>
+
+        <a href="#food-entry" class="btn">
+            Get Started →
+        </a>
+
+    </div>
+
+
+    <div class="hero-card">
+
+        <h2>Today's Impact 📊</h2>
+
+        <div class="stat">
+            <span>Food Prepared</span>
+            <strong>{{ total_prepared }} meals</strong>
+        </div>
+
+        <div class="stat">
+            <span>Food Consumed</span>
+            <strong>{{ total_consumed }} meals</strong>
+        </div>
+
+        <div class="stat">
+            <span>Surplus Detected</span>
+            <strong>{{ total_surplus }} meals</strong>
+        </div>
+
+        <div class="stat">
+            <span>Food Saved</span>
+            <strong>{{ total_surplus }} meals</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Dashboard -->
+
+<section class="dashboard" id="dashboard">
+
+    <h2>📊 Impact Dashboard</h2>
+
+    <p>
+        Track the food usage and surplus recorded by the system.
+    </p>
+
+    <div class="dashboard-container">
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-icon">🍱</div>
+
+            <h3>{{ total_prepared }}</h3>
+
+            <p>Food Prepared</p>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-icon">🍽️</div>
+
+            <h3>{{ total_consumed }}</h3>
+
+            <p>Food Consumed</p>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-icon">♻️</div>
+
+            <h3>{{ total_surplus }}</h3>
+
+            <p>Surplus Food</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Features -->
+
+<section class="features" id="features">
+
+    <h2>How Our System Works</h2>
+
+    <div class="feature-container">
+
+        <div class="feature">
+
+            <div class="icon">📊</div>
+
+            <h3>Demand Prediction</h3>
+
+            <p>
+                Estimate expected food demand using
+                previous consumption data.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">🍱</div>
+
+            <h3>Surplus Detection</h3>
+
+            <p>
+                Track prepared and consumed food to
+                identify surplus automatically.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">🤝</div>
+
+            <h3>Smart Matching</h3>
+
+            <p>
+                Connect available surplus with suitable
+                recipient organizations.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">🌍</div>
+
+            <h3>Impact Tracking</h3>
+
+            <p>
+                Monitor food saved and overall social impact.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Food Entry -->
+
+<section class="food-entry" id="food-entry">
+
+    <h2>🍱 Add Food Information</h2>
+
+    <p>
+        Enter today's food preparation and consumption details.
+    </p>
+
+    <form action="/add-food" method="POST">
+
+        <label for="food_name">
+            Food Name
+        </label>
+
+        <input
+            type="text"
+            id="food_name"
+            name="food_name"
+            placeholder="Example: Rice"
+            required
+        >
+
+
+        <label for="prepared">
+            Quantity Prepared
+        </label>
+
+        <input
+            type="number"
+            id="prepared"
+            name="prepared"
+            placeholder="Example: 100"
+            min="0"
+            required
+        >
+
+
+        <label for="consumed">
+            Quantity Consumed
+        </label>
+
+        <input
+            type="number"
+            id="consumed"
+            name="consumed"
+            placeholder="Example: 80"
+            min="0"
+            required
+        >
+
+
+        <button type="submit">
+            Add Food
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- Demand Prediction -->
+
+<section class="food-entry" id="prediction">
+
+    <h2>🤖 Demand Prediction</h2>
+
+    <p>
+        Enter a food name to estimate the quantity needed
+        from previous consumption records.
+    </p>
+
+    <form action="/predict" method="POST">
+
+        <label for="prediction_food">
+            Food Name
+        </label>
+
+        <input
+            type="text"
+            id="prediction_food"
+            name="food_name"
+            placeholder="Example: Rice"
+            required
+        >
+
+        <button type="submit">
+            Predict Demand
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- Smart Recipient Matching -->
+
+<section class="food-entry matching-section" id="matching">
+
+    <h2>🤝 Smart Recipient Matching</h2>
+
+    <p>
+        Find suitable recipients for available surplus food.
+    </p>
+
+    <form action="/match" method="POST">
+
+        <label for="match_food">
+            Food Name
+        </label>
+
+        <input
+            type="text"
+            id="match_food"
+            name="food_name"
+            placeholder="Example: Rice"
+            required
+        >
+
+
+        <label for="match_surplus">
+            Surplus Quantity
+        </label>
+
+        <input
+            type="number"
+            id="match_surplus"
+            name="surplus"
+            placeholder="Example: 20"
+            min="0"
+            required
+        >
+
+
+        <button type="submit">
+            Find Recipients 🤝
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- Recent Entries -->
+
+<section class="entries">
+
+    <h2>📋 Recent Food Entries</h2>
+
+    {% if entries %}
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Food</th>
+                    <th>Prepared</th>
+                    <th>Consumed</th>
+                    <th>Surplus</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for entry in entries %}
+
+                <tr>
+
+                    <td>{{ entry["food_name"] }}</td>
+
+                    <td>{{ entry["prepared"] }}</td>
+
+                    <td>{{ entry["consumed"] }}</td>
+
+                    <td>{{ entry["surplus"] }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <p>
+        No food entries yet. Add your first entry above.
+    </p>
+
+    {% endif %}
+
+</section>
+
+
+<!-- About -->
+
+<section class="about" id="about">
+
+    <h2>About Smart Food Reduction</h2>
+
+    <p>
+        Our system aims to reduce unnecessary food waste by
+        predicting demand, identifying surplus food and helping
+        redistribute usable food to people and organizations
+        that need it.
+    </p>
+
+</section>
+
+
+<!-- Footer -->
+
+<footer>
+
+    <p>
+        🌱 Smart Food Reduction |
+        Reducing Waste, Creating Impact
+    </p>
+
+</footer>
+
 
 </body>
+
 </html>
