@@ -15,54 +15,124 @@
 
 </head>
 
+
 <body>
 
-    <div class="result-container">
 
-        <h1>Food Analysis 🌱</h1>
+<div class="result-page">
 
-        <div class="result-card">
+    <div class="result-card">
 
-            <h2>{{ food_name }}</h2>
+        {% if error %}
 
-            <p>
-                <strong>Quantity Prepared:</strong>
-                {{ prepared }}
-            </p>
+            <h1>
+                ⚠️ Food Entry Error
+            </h1>
 
             <p>
-                <strong>Quantity Consumed:</strong>
-                {{ consumed }}
+                {{ error }}
             </p>
 
-            <p>
-                <strong>Surplus Food:</strong>
-                {{ surplus }}
-            </p>
+        {% else %}
+
+            <h1>
+                ✅ Food Added Successfully
+            </h1>
+
+
+            <div class="result-item">
+
+                <span>
+                    Food
+                </span>
+
+                <strong>
+                    {{ food_name }}
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <span>
+                    Prepared
+                </span>
+
+                <strong>
+                    {{ prepared }}
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <span>
+                    Consumed
+                </span>
+
+                <strong>
+                    {{ consumed }}
+                </strong>
+
+            </div>
+
+
+            <div class="result-item">
+
+                <span>
+                    Surplus
+                </span>
+
+                <strong>
+                    {{ surplus }}
+                </strong>
+
+            </div>
+
 
             {% if surplus > 0 %}
 
-                <div class="success-message">
-                    🍱 Surplus detected!
-                    <br>
-                    This food can potentially be redistributed.
+                <div class="surplus-message">
+
+                    ♻️
+
+                    <p>
+                        Surplus food detected!
+                        Consider redistributing it.
+                    </p>
+
                 </div>
 
             {% else %}
 
                 <div class="success-message">
-                    ✅ No surplus food detected.
+
+                    ✅
+
+                    <p>
+                        No surplus food detected.
+                    </p>
+
                 </div>
 
             {% endif %}
 
-        </div>
+        {% endif %}
 
-        <a href="/" class="btn">
+
+        <a href="/"
+           class="btn">
+
             ← Back to Dashboard
+
         </a>
 
     </div>
+
+</div>
+
 
 </body>
 

@@ -15,53 +15,125 @@
 
 </head>
 
+
 <body>
 
-    <div class="result-container">
 
-        <h1>🤖 Demand Prediction</h1>
+<div class="result-page">
 
-        <div class="result-card">
+    <div class="result-card">
 
-            <h2>{{ food_name }}</h2>
+        <h1>
+            🤖 Smart Demand Prediction
+        </h1>
 
-            {% if prediction is none %}
 
-                <p>
-                    No previous consumption data is available
-                    for this food.
-                </p>
+        <h2>
+            {{ food_name }}
+        </h2>
 
-                <div class="warning-message">
-                    📊 Add some food entries first to generate
-                    a demand prediction.
+
+        {% if prediction is not none %}
+
+            <div class="prediction-result">
+
+                <div class="prediction-icon">
+                    📈
                 </div>
 
-            {% else %}
 
-                <p>
-                    Based on previous consumption records:
-                </p>
-
-                <h2>
-                    Recommended quantity:
+                <h3>
                     {{ prediction }} meals
-                </h2>
+                </h3>
 
-                <div class="success-message">
-                    📊 This prediction can help reduce
-                    over-preparation and unnecessary food waste.
+
+                <p class="prediction-type">
+
+                    {{ prediction_type }}
+
+                </p>
+
+
+                <p>
+                    {{ explanation }}
+                </p>
+
+
+                <div class="prediction-info">
+
+                    <strong>
+                        💡 Recommendation
+                    </strong>
+
+                    <p>
+
+                        Consider preparing around
+
+                        <strong>
+                            {{ prediction }} meals
+                        </strong>
+
+                        based on the recorded
+                        consumption trend.
+
+                    </p>
+
                 </div>
 
-            {% endif %}
+            </div>
 
-        </div>
 
-        <a href="/" class="btn">
+        {% else %}
+
+            <div class="prediction-empty">
+
+                <div class="prediction-icon">
+                    📭
+                </div>
+
+
+                <h3>
+                    No Previous Data
+                </h3>
+
+
+                <p>
+                    {{ explanation }}
+                </p>
+
+
+                <div class="prediction-info">
+
+                    <strong>
+                        💡 What to do next?
+                    </strong>
+
+                    <p>
+
+                        Add food records for this food
+                        so the system can learn from
+                        previous consumption.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+        <a href="/"
+           class="btn">
+
             ← Back to Dashboard
+
         </a>
 
     </div>
+
+</div>
+
 
 </body>
 

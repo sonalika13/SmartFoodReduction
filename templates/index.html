@@ -15,10 +15,13 @@
 
 </head>
 
+
 <body>
 
 
-<!-- Navigation -->
+<!-- =====================================
+     NAVIGATION
+===================================== -->
 
 <nav class="navbar">
 
@@ -26,11 +29,16 @@
         🌱 SmartFood
     </div>
 
+
     <div class="nav-links">
 
         <a href="/">Home</a>
 
         <a href="#dashboard">Dashboard</a>
+
+        <a href="#impact">Impact</a>
+
+        <a href="#analytics">Analytics</a>
 
         <a href="#features">Features</a>
 
@@ -40,6 +48,8 @@
 
         <a href="#matching">Matching</a>
 
+        <a href="#redistribution">Redistribution</a>
+
         <a href="#about">About</a>
 
     </div>
@@ -47,25 +57,41 @@
 </nav>
 
 
-<!-- Hero Section -->
+
+<!-- =====================================
+     HERO
+===================================== -->
 
 <section class="hero">
 
     <div class="hero-text">
 
         <h1>
+
             Reduce Food Waste.
-            <span>Feed More.</span>
+
+            <span>
+                Feed More.
+            </span>
+
         </h1>
 
+
         <p>
-            Smart Food Reduction uses data-driven demand
-            prediction, surplus monitoring and intelligent
-            food redistribution to reduce avoidable food waste.
+
+            Smart Food Reduction uses data-driven
+            demand prediction, surplus monitoring
+            and intelligent food redistribution
+            to reduce avoidable food waste.
+
         </p>
 
-        <a href="#food-entry" class="btn">
+
+        <a href="#food-entry"
+           class="btn">
+
             Get Started →
+
         </a>
 
     </div>
@@ -73,26 +99,73 @@
 
     <div class="hero-card">
 
-        <h2>Today's Impact 📊</h2>
+        <h2>
+            Today's Impact 📊
+        </h2>
+
 
         <div class="stat">
-            <span>Food Prepared</span>
-            <strong>{{ total_prepared }} meals</strong>
+
+            <span>
+                Food Prepared
+            </span>
+
+            <strong>
+                {{ total_prepared }} meals
+            </strong>
+
         </div>
 
-        <div class="stat">
-            <span>Food Consumed</span>
-            <strong>{{ total_consumed }} meals</strong>
-        </div>
 
         <div class="stat">
-            <span>Surplus Detected</span>
-            <strong>{{ total_surplus }} meals</strong>
+
+            <span>
+                Food Consumed
+            </span>
+
+            <strong>
+                {{ total_consumed }} meals
+            </strong>
+
         </div>
 
+
         <div class="stat">
-            <span>Food Saved</span>
-            <strong>{{ total_surplus }} meals</strong>
+
+            <span>
+                Surplus Detected
+            </span>
+
+            <strong>
+                {{ total_surplus }} meals
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span>
+                Redistributed
+            </span>
+
+            <strong>
+                {{ total_redistributed }} meals
+            </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span>
+                Surplus Rate
+            </span>
+
+            <strong>
+                {{ reduction_rate }}%
+            </strong>
+
         </div>
 
     </div>
@@ -100,47 +173,94 @@
 </section>
 
 
-<!-- Dashboard -->
 
-<section class="dashboard" id="dashboard">
+<!-- =====================================
+     DASHBOARD
+===================================== -->
 
-    <h2>📊 Impact Dashboard</h2>
+<section class="dashboard"
+         id="dashboard">
+
+    <h2>
+        📊 Impact Dashboard
+    </h2>
+
 
     <p>
-        Track the food usage and surplus recorded by the system.
+
+        Track food preparation, consumption,
+        surplus and redistribution.
+
     </p>
+
 
     <div class="dashboard-container">
 
+
         <div class="dashboard-card">
 
-            <div class="dashboard-icon">🍱</div>
+            <div class="dashboard-icon">
+                🍱
+            </div>
 
-            <h3>{{ total_prepared }}</h3>
+            <h3>
+                {{ total_prepared }}
+            </h3>
 
-            <p>Food Prepared</p>
+            <p>
+                Food Prepared
+            </p>
 
         </div>
 
 
         <div class="dashboard-card">
 
-            <div class="dashboard-icon">🍽️</div>
+            <div class="dashboard-icon">
+                🍽️
+            </div>
 
-            <h3>{{ total_consumed }}</h3>
+            <h3>
+                {{ total_consumed }}
+            </h3>
 
-            <p>Food Consumed</p>
+            <p>
+                Food Consumed
+            </p>
 
         </div>
 
 
         <div class="dashboard-card">
 
-            <div class="dashboard-icon">♻️</div>
+            <div class="dashboard-icon">
+                ♻️
+            </div>
 
-            <h3>{{ total_surplus }}</h3>
+            <h3>
+                {{ total_surplus }}
+            </h3>
 
-            <p>Surplus Food</p>
+            <p>
+                Surplus Food
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-icon">
+                🤝
+            </div>
+
+            <h3>
+                {{ total_redistributed }}
+            </h3>
+
+            <p>
+                Food Redistributed
+            </p>
 
         </div>
 
@@ -149,23 +269,264 @@
 </section>
 
 
-<!-- Features -->
 
-<section class="features" id="features">
+<!-- =====================================
+     FOOD ANALYTICS
+===================================== -->
 
-    <h2>How Our System Works</h2>
+<section class="analytics-section"
+         id="analytics">
+
+    <h2>
+        📈 Food Analytics
+    </h2>
+
+
+    <p>
+
+        Visual comparison of food preparation,
+        consumption, surplus and redistribution.
+
+    </p>
+
+
+    <div class="chart-card">
+
+        <canvas id="foodChart"></canvas>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     ENVIRONMENTAL IMPACT
+===================================== -->
+
+<section class="impact-section"
+         id="impact">
+
+
+    <h2>
+        🌍 Environmental Impact
+    </h2>
+
+
+    <p>
+
+        Understand how the system can help
+        reduce unnecessary food waste and
+        improve food utilization.
+
+    </p>
+
+
+    <!-- NEW IMPACT CARDS -->
+
+    <div class="impact-container">
+
+
+        <!-- SURPLUS MEALS -->
+
+        <div class="impact-card">
+
+            <div class="impact-icon">
+                🍱
+            </div>
+
+            <h3>
+                {{ total_surplus }}
+            </h3>
+
+            <p>
+                Surplus Meals Detected
+            </p>
+
+        </div>
+
+
+        <!-- MEALS SAVED -->
+
+        <div class="impact-card">
+
+            <div class="impact-icon">
+                ♻️
+            </div>
+
+            <h3>
+                {{ meals_saved }}
+            </h3>
+
+            <p>
+                Meals Saved
+            </p>
+
+        </div>
+
+
+        <!-- WASTE AVOIDED -->
+
+        <div class="impact-card">
+
+            <div class="impact-icon">
+                🌍
+            </div>
+
+            <h3>
+                {{ waste_avoided }}
+            </h3>
+
+            <p>
+                Waste Avoided
+            </p>
+
+        </div>
+
+
+        <!-- REDISTRIBUTION RATE -->
+
+        <div class="impact-card">
+
+            <div class="impact-icon">
+                📊
+            </div>
+
+            <h3>
+                {{ redistribution_rate }}%
+            </h3>
+
+            <p>
+                Redistribution Rate
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="impact-note">
+
+        <strong>
+            💡 Impact:
+        </strong>
+
+        The system identifies surplus food
+        and provides an opportunity to
+        redistribute usable food instead of
+        leaving it unused.
+
+        <br><br>
+
+        <strong>
+            ♻️ Waste Avoided:
+        </strong>
+
+        Represents surplus food recorded as
+        redistributed in this prototype.
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     FOOD WASTE ALERT
+===================================== -->
+
+<section class="alert-section">
+
+    <h2>
+        🚨 Food Waste Alert
+    </h2>
+
+
+    <div class="waste-alert {{ waste_alert_class }}">
+
+        <h3>
+            Smart Monitoring
+        </h3>
+
+
+        <p>
+            {{ waste_alert }}
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     SMART RECOMMENDATION
+===================================== -->
+
+<section class="recommendation-section">
+
+    <h2>
+        💡 Smart Recommendation
+    </h2>
+
+
+    <div class="recommendation-card">
+
+        <div class="recommendation-icon">
+            🤖
+        </div>
+
+
+        <div>
+
+            <h3>
+                System Suggestion
+            </h3>
+
+
+            <p>
+                {{ recommendation }}
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================
+     FEATURES
+===================================== -->
+
+<section class="features"
+         id="features">
+
+
+    <h2>
+        How Our System Works
+    </h2>
+
 
     <div class="feature-container">
 
+
         <div class="feature">
 
-            <div class="icon">📊</div>
+            <div class="icon">
+                📊
+            </div>
 
-            <h3>Demand Prediction</h3>
+            <h3>
+                Demand Prediction
+            </h3>
 
             <p>
-                Estimate expected food demand using
-                previous consumption data.
+
+                Estimate expected food demand
+                using previous consumption data.
+
             </p>
 
         </div>
@@ -173,13 +534,19 @@
 
         <div class="feature">
 
-            <div class="icon">🍱</div>
+            <div class="icon">
+                🍱
+            </div>
 
-            <h3>Surplus Detection</h3>
+            <h3>
+                Surplus Detection
+            </h3>
 
             <p>
-                Track prepared and consumed food to
-                identify surplus automatically.
+
+                Track prepared and consumed food
+                to identify surplus automatically.
+
             </p>
 
         </div>
@@ -187,13 +554,19 @@
 
         <div class="feature">
 
-            <div class="icon">🤝</div>
+            <div class="icon">
+                🤝
+            </div>
 
-            <h3>Smart Matching</h3>
+            <h3>
+                Smart Matching
+            </h3>
 
             <p>
-                Connect available surplus with suitable
-                recipient organizations.
+
+                Connect available surplus with
+                suitable recipient organizations.
+
             </p>
 
         </div>
@@ -201,12 +574,39 @@
 
         <div class="feature">
 
-            <div class="icon">🌍</div>
+            <div class="icon">
+                ♻️
+            </div>
 
-            <h3>Impact Tracking</h3>
+            <h3>
+                Food Redistribution
+            </h3>
 
             <p>
-                Monitor food saved and overall social impact.
+
+                Record surplus food that is
+                assigned to recipient organizations.
+
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                🌍
+            </div>
+
+            <h3>
+                Impact Tracking
+            </h3>
+
+            <p>
+
+                Monitor food usage, surplus
+                and redistribution.
+
             </p>
 
         </div>
@@ -216,21 +616,37 @@
 </section>
 
 
-<!-- Food Entry -->
 
-<section class="food-entry" id="food-entry">
+<!-- =====================================
+     FOOD ENTRY
+===================================== -->
 
-    <h2>🍱 Add Food Information</h2>
+<section class="food-entry"
+         id="food-entry">
+
+
+    <h2>
+        🍱 Add Food Information
+    </h2>
+
 
     <p>
-        Enter today's food preparation and consumption details.
+
+        Enter today's food preparation
+        and consumption details.
+
     </p>
 
-    <form action="/add-food" method="POST">
+
+    <form action="/add-food"
+          method="POST"
+          onsubmit="return validateFoodForm()">
+
 
         <label for="food_name">
             Food Name
         </label>
+
 
         <input
             type="text"
@@ -245,6 +661,7 @@
             Quantity Prepared
         </label>
 
+
         <input
             type="number"
             id="prepared"
@@ -252,12 +669,14 @@
             placeholder="Example: 100"
             min="0"
             required
+            oninput="checkQuantity()"
         >
 
 
         <label for="consumed">
             Quantity Consumed
         </label>
+
 
         <input
             type="number"
@@ -266,7 +685,22 @@
             placeholder="Example: 80"
             min="0"
             required
+            oninput="checkQuantity()"
         >
+
+
+        <p id="quantity-warning"
+           style="
+               color: #842029;
+               font-weight: bold;
+               display: none;
+               margin-top: 5px;
+           ">
+
+            ⚠️ Consumed quantity cannot be greater
+            than prepared quantity.
+
+        </p>
 
 
         <button type="submit">
@@ -278,22 +712,37 @@
 </section>
 
 
-<!-- Demand Prediction -->
 
-<section class="food-entry" id="prediction">
+<!-- =====================================
+     DEMAND PREDICTION
+===================================== -->
 
-    <h2>🤖 Demand Prediction</h2>
+<section class="food-entry"
+         id="prediction">
+
+
+    <h2>
+        🤖 Demand Prediction
+    </h2>
+
 
     <p>
-        Enter a food name to estimate the quantity needed
-        from previous consumption records.
+
+        Enter a food name to estimate the
+        quantity needed from previous
+        consumption records.
+
     </p>
 
-    <form action="/predict" method="POST">
+
+    <form action="/predict"
+          method="POST">
+
 
         <label for="prediction_food">
             Food Name
         </label>
+
 
         <input
             type="text"
@@ -302,6 +751,7 @@
             placeholder="Example: Rice"
             required
         >
+
 
         <button type="submit">
             Predict Demand
@@ -312,21 +762,36 @@
 </section>
 
 
-<!-- Smart Recipient Matching -->
 
-<section class="food-entry matching-section" id="matching">
+<!-- =====================================
+     SMART MATCHING
+===================================== -->
 
-    <h2>🤝 Smart Recipient Matching</h2>
+<section class="food-entry matching-section"
+         id="matching">
+
+
+    <h2>
+        🤝 Smart Recipient Matching
+    </h2>
+
 
     <p>
-        Find suitable recipients for available surplus food.
+
+        Find suitable recipients for
+        available surplus food.
+
     </p>
 
-    <form action="/match" method="POST">
+
+    <form action="/match"
+          method="POST">
+
 
         <label for="match_food">
             Food Name
         </label>
+
 
         <input
             type="text"
@@ -340,6 +805,7 @@
         <label for="match_surplus">
             Surplus Quantity
         </label>
+
 
         <input
             type="number"
@@ -360,92 +826,402 @@
 </section>
 
 
-<!-- Recent Entries -->
 
-<section class="entries">
+<!-- =====================================
+     REDISTRIBUTION
+===================================== -->
 
-    <h2>📋 Recent Food Entries</h2>
+<section class="redistribution-section"
+         id="redistribution">
 
-    {% if entries %}
 
-    <div class="table-container">
+    <h2>
+        ♻️ Redistribution Center
+    </h2>
 
-        <table>
 
-            <thead>
+    <p>
 
-                <tr>
+        Track surplus food that has been
+        assigned to recipient organizations.
 
-                    <th>Food</th>
-                    <th>Prepared</th>
-                    <th>Consumed</th>
-                    <th>Surplus</th>
+    </p>
 
-                </tr>
 
-            </thead>
+    <div class="redistribution-summary">
 
-            <tbody>
+        <div class="redistribution-total">
 
-                {% for entry in entries %}
+            <div class="redistribution-icon">
+                ♻️
+            </div>
 
-                <tr>
 
-                    <td>{{ entry["food_name"] }}</td>
+            <h3>
+                {{ total_redistributed }}
+            </h3>
 
-                    <td>{{ entry["prepared"] }}</td>
 
-                    <td>{{ entry["consumed"] }}</td>
+            <p>
+                Meals Redistributed
+            </p>
 
-                    <td>{{ entry["surplus"] }}</td>
-
-                </tr>
-
-                {% endfor %}
-
-            </tbody>
-
-        </table>
+        </div>
 
     </div>
 
+
+
+    {% if redistributions %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Food</th>
+
+                        <th>Quantity</th>
+
+                        <th>Recipient</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for item in redistributions %}
+
+                        <tr>
+
+                            <td>
+                                {{ item["food_name"] }}
+                            </td>
+
+                            <td>
+                                {{ item["quantity"] }} meals
+                            </td>
+
+                            <td>
+                                🏢 {{ item["recipient"] }}
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
     {% else %}
 
-    <p>
-        No food entries yet. Add your first entry above.
-    </p>
+        <div class="redistribution-empty">
+
+            <p>
+                No food has been redistributed yet.
+            </p>
+
+            <p>
+                Add surplus food and use Smart
+                Recipient Matching to redistribute it.
+            </p>
+
+        </div>
 
     {% endif %}
 
 </section>
 
 
-<!-- About -->
 
-<section class="about" id="about">
+<!-- =====================================
+     RECENT FOOD ENTRIES
+===================================== -->
 
-    <h2>About Smart Food Reduction</h2>
+<section class="entries">
+
+
+    <h2>
+        📋 Recent Food Entries
+    </h2>
+
+
+    {% if entries %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Food</th>
+
+                        <th>Prepared</th>
+
+                        <th>Consumed</th>
+
+                        <th>Surplus</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for entry in entries %}
+
+                        <tr>
+
+                            <td>
+                                {{ entry["food_name"] }}
+                            </td>
+
+                            <td>
+                                {{ entry["prepared"] }}
+                            </td>
+
+                            <td>
+                                {{ entry["consumed"] }}
+                            </td>
+
+                            <td>
+                                {{ entry["surplus"] }}
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <p>
+
+            No food entries yet.
+            Add your first entry above.
+
+        </p>
+
+    {% endif %}
+
+</section>
+
+
+
+<!-- =====================================
+     ABOUT
+===================================== -->
+
+<section class="about"
+         id="about">
+
+
+    <h2>
+        About Smart Food Reduction
+    </h2>
+
 
     <p>
-        Our system aims to reduce unnecessary food waste by
-        predicting demand, identifying surplus food and helping
-        redistribute usable food to people and organizations
-        that need it.
+
+        Smart Food Reduction is a food waste
+        management system designed to monitor
+        food preparation and consumption,
+        identify surplus food, estimate future
+        demand and support redistribution to
+        suitable recipient organizations.
+
     </p>
 
 </section>
 
 
-<!-- Footer -->
+
+<!-- =====================================
+     FOOTER
+===================================== -->
 
 <footer>
 
     <p>
+
         🌱 Smart Food Reduction |
+
         Reducing Waste, Creating Impact
+
     </p>
 
 </footer>
+
+
+
+<!-- =====================================
+     FOOD QUANTITY VALIDATION
+===================================== -->
+
+<script>
+
+function checkQuantity() {
+
+    const prepared =
+        Number(document.getElementById("prepared").value);
+
+    const consumed =
+        Number(document.getElementById("consumed").value);
+
+    const warning =
+        document.getElementById("quantity-warning");
+
+
+    if (consumed > prepared && prepared >= 0) {
+
+        warning.style.display = "block";
+
+    } else {
+
+        warning.style.display = "none";
+
+    }
+
+}
+
+
+
+function validateFoodForm() {
+
+    const prepared =
+        Number(document.getElementById("prepared").value);
+
+    const consumed =
+        Number(document.getElementById("consumed").value);
+
+
+    if (consumed > prepared) {
+
+        alert(
+            "Consumed quantity cannot be greater than prepared quantity."
+        );
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+</script>
+
+
+
+<!-- =====================================
+     CHART.JS
+===================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+const chartCanvas =
+    document.getElementById("foodChart");
+
+
+if (chartCanvas) {
+
+    new Chart(chartCanvas, {
+
+        type: "bar",
+
+        data: {
+
+            labels: [
+                "Prepared",
+                "Consumed",
+                "Surplus",
+                "Redistributed"
+            ],
+
+            datasets: [{
+
+                label: "Meals",
+
+                data: [
+                    {{ total_prepared }},
+                    {{ total_consumed }},
+                    {{ total_surplus }},
+                    {{ total_redistributed }}
+                ]
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+                    display: true
+                }
+
+            },
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true,
+
+                    title: {
+
+                        display: true,
+
+                        text: "Number of Meals"
+
+                    }
+
+                },
+
+                x: {
+
+                    title: {
+
+                        display: true,
+
+                        text: "Food Statistics"
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+</script>
 
 
 </body>

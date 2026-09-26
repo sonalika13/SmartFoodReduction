@@ -8,77 +8,186 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Recipient Matching</title>
+    <title>Smart Recipient Matching</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
+
 <body>
 
-    <div class="result-container">
 
-        <h1>🤝 Smart Recipient Matching</h1>
+<div class="result-page">
+
+    <div class="matching-page-card">
+
+        <h1>
+            🤝 Smart Recipient Matching
+        </h1>
 
 
-        <div class="result-card">
+        <p class="matching-food">
 
-            <h2>{{ food_name }}</h2>
+            Food:
+            <strong>
+                {{ food_name }}
+            </strong>
 
-            <p>
-                <strong>Available Surplus:</strong>
+        </p>
+
+
+        <p class="matching-surplus">
+
+            Available Surplus:
+            <strong>
                 {{ surplus }} meals
-            </p>
+            </strong>
 
-            <div class="success-message">
-                {{ message }}
-            </div>
+        </p>
+
+
+        <div class="matching-message">
+
+            {{ message }}
 
         </div>
 
 
         {% if recipients %}
 
-            <h2 class="recipient-heading">
-                Suitable Recipients
-            </h2>
+            <div class="recipient-container">
+
+                {% for recipient in recipients %}
+
+                    <div class="recipient-card">
+
+                        <div class="recipient-icon">
+                            🏢
+                        </div>
 
 
-            {% for recipient in recipients %}
+                        <h2>
+                            {{ recipient.name }}
+                        </h2>
 
-                <div class="result-card recipient-card">
 
-                    <h2>
-                        🏢 {{ recipient.name }}
-                    </h2>
+                        <p>
+                            {{ recipient.type }}
+                        </p>
 
-                    <p>
-                        <strong>Type:</strong>
-                        {{ recipient.type }}
-                    </p>
 
-                    <p>
-                        <strong>Capacity:</strong>
-                        {{ recipient.capacity }} meals
-                    </p>
+                        <p>
 
-                    <button class="match-button">
-                        Match Food
-                    </button>
+                            Capacity:
+                            <strong>
+                                {{ recipient.capacity }} meals
+                            </strong>
 
-                </div>
+                        </p>
 
-            {% endfor %}
+
+                        <p>
+
+                            Can Accept:
+                            <strong>
+                                {{ recipient.accepted_quantity }} meals
+                            </strong>
+
+                        </p>
+
+
+                        <div class="match-percentage">
+
+                            📊 Match:
+
+                            <strong>
+                                {{ recipient.match_percentage }}%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="recipient-status
+                                    {{ recipient.status_class }}">
+
+                            {{ recipient.status }}
+
+                        </div>
+
+
+                        <p class="recipient-recommendation">
+
+                            💡 {{ recipient.recommendation }}
+
+                        </p>
+
+
+                        {% if recipient.status_class != "not-suitable" %}
+
+                            <form action="/redistribute"
+                                  method="POST">
+
+                                <input
+                                    type="hidden"
+                                    name="food_name"
+                                    value="{{ food_name }}"
+                                >
+
+
+                                <input
+                                    type="hidden"
+                                    name="recipient"
+                                    value="{{ recipient.name }}"
+                                >
+
+
+                                <label>
+                                    Quantity to Redistribute
+                                </label>
+
+
+                                <input
+                                    type="number"
+                                    name="quantity"
+                                    min="1"
+                                    max="{{ surplus }}"
+                                    value="{{ recipient.accepted_quantity }}"
+                                    required
+                                >
+
+
+                                <button type="submit">
+
+                                    ♻️ Redistribute
+
+                                </button>
+
+                            </form>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
 
         {% endif %}
 
 
-        <a href="/" class="btn">
+        <a href="/"
+           class="btn">
+
             ← Back to Dashboard
+
         </a>
 
     </div>
+
+</div>
+
 
 </body>
 
