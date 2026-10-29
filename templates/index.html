@@ -1,1229 +1,1445 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071411">
+    <title>Smart Food Reduction | Smart Sustainability</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <title>Smart Food Reduction</title>
+    <style>
+        :root {
+            --bg: #071411;
+            --panel: #10231d;
+            --panel-light: #142d25;
+            --green: #00e69a;
+            --green-light: #8dffd1;
+            --text: #effaf4;
+            --muted: #9ab5a9;
+            --border: #ffffff18;
+            --danger: #ff7777;
+            --warning: #ffd477;
+        }
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 115px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background:
+                radial-gradient(ellipse at 85% 0%, #00e69a12, transparent 35%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, input, select {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        /* NAVIGATION */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(7, 20, 17, .96);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-size: 19px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .brand-icon {
+            width: 43px;
+            height: 43px;
+            display: grid;
+            place-items: center;
+            color: var(--green);
+            border: 1px solid #00e69a55;
+            background: #00e69a10;
+            border-radius: 13px;
+        }
+
+        .brand small {
+            display: block;
+            color: var(--muted);
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px 15px;
+            flex-wrap: wrap;
+            font-size: 11px;
+            color: #c0d2c8;
+        }
+
+        .nav-links a {
+            transition: color .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .nav-links .nav-cta {
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: var(--green);
+            color: #06160f;
+            font-weight: 800;
+        }
+
+        /* HERO */
+
+        .hero {
+            padding: 78px 0;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            align-items: center;
+            gap: 48px;
+        }
+
+        .eyebrow {
+            color: var(--green);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2.4px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        h1, h2, h3 {
+            line-height: 1.25;
+        }
+
+        h1 {
+            font-size: clamp(40px, 5vw, 66px);
+            letter-spacing: -2.4px;
+            margin-bottom: 22px;
+        }
+
+        h1 span {
+            display: block;
+            color: var(--green);
+            background: linear-gradient(90deg, #00e69a, #a0ffda);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            max-width: 510px;
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            padding: 12px 17px;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: #04150e;
+            border-color: var(--green);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px #00e69a35;
+        }
+
+        .btn-secondary {
+            color: var(--text);
+            background: #ffffff06;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--green);
+        }
+
+        .hero-note {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 27px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .hero-note i {
+            color: var(--green);
+            font-size: 21px;
+        }
+
+        .hero-visual {
+            position: relative;
+            padding: 13px;
+            border: 1px solid #ffffff20;
+            border-radius: 22px;
+            background: linear-gradient(145deg, #ffffff12, #ffffff03);
+            box-shadow: 0 30px 80px #00000035;
+        }
+
+        .image-frame {
+            height: 400px;
+            overflow: hidden;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #163b2c, #071411);
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 15px 21px;
+            border: 1px solid #ffffff20;
+            border-radius: 0 13px 0 13px;
+            background: #0b211bf5;
+        }
+
+        .image-label strong {
+            display: block;
+            color: var(--green);
+            font-size: 16px;
+        }
+
+        .image-label span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* MISSION STRIP */
+
+        .mission {
+            padding: 27px 0;
+            background: linear-gradient(100deg, #0e2921, #10251f);
+            border-top: 1px solid #00e69a20;
+            border-bottom: 1px solid #00e69a20;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .mission-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .mission-item > i {
+            font-size: 24px;
+            color: var(--green);
+        }
+
+        .mission-item strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .mission-item span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* COMMON SECTIONS */
+
+        .section {
+            padding: 75px 0;
+            scroll-margin-top: 100px;
+        }
+
+        .section-heading {
+            max-width: 680px;
+            margin: 0 auto 38px;
+            text-align: center;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            margin-bottom: 13px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 19px;
+        }
+
+        .card {
+            min-width: 0;
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: linear-gradient(145deg, #122920, #0a1b16);
+            transition: .25s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #00e69a60;
+            box-shadow: 0 16px 40px #00000020;
+        }
+
+        .card-icon {
+            width: 47px;
+            height: 47px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            color: var(--green);
+            background: #00e69a12;
+            border: 1px solid #00e69a30;
+            border-radius: 12px;
+            font-size: 19px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 17px;
+        }
+
+        .text-link {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        /* DASHBOARD */
+
+        .stat-card {
+            padding: 21px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #10231d;
+            scroll-margin-top: 120px;
+        }
+
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .stat-top i {
+            color: var(--green);
+            font-size: 19px;
+        }
+
+        .stat-number {
+            display: block;
+            margin-top: 12px;
+            color: var(--green);
+            font-size: 30px;
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .stat-caption {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .notice {
+            padding: 17px 19px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            background: #ffffff05;
+            font-size: 13px;
+        }
+
+        .notice i {
+            margin-right: 8px;
+            color: var(--green);
+        }
+
+        .notice.danger {
+            border-color: #ff777755;
+        }
+
+        .notice.danger i {
+            color: var(--danger);
+        }
+
+        .notice.warning {
+            border-color: #ffd47755;
+        }
+
+        .notice.warning i {
+            color: var(--warning);
+        }
+
+        /* FORMS */
+
+        .form-card {
+            min-width: 0;
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: linear-gradient(145deg, #122920, #0a1b16);
+            scroll-margin-top: 115px;
+        }
+
+        .form-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .form-description {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 7px;
+            color: #d8e8df;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            min-width: 0;
+            padding: 11px 12px;
+            border: 1px solid #ffffff20;
+            border-radius: 9px;
+            outline: none;
+            background: #071711;
+            color: var(--text);
+            font-size: 13px;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px #00e69a13;
+        }
+
+        .field input::placeholder {
+            color: #70877b;
+        }
+
+        .form-card .btn {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .form-note {
+            margin-top: 12px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* TABLES */
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 480px;
+            font-size: 12px;
+        }
+
+        th, td {
+            padding: 13px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--green);
+            background: #10251e;
+            font-weight: 700;
+        }
+
+        td {
+            color: #dcebe2;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: #ffffff04;
+        }
+
+        .empty-state {
+            padding: 26px;
+            color: var(--muted);
+            text-align: center;
+            border: 1px dashed #ffffff25;
+            border-radius: 12px;
+            font-size: 13px;
+        }
+
+        /* ABOUT */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 22px;
+        }
+
+        .about-panel {
+            padding: 29px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: linear-gradient(145deg, #122920, #0a1b16);
+        }
+
+        .about-panel p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 12px;
+        }
+
+        .tech-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .tech-item {
+            display: flex;
+            gap: 13px;
+            align-items: flex-start;
+        }
+
+        .tech-item i {
+            color: var(--green);
+            margin-top: 4px;
+        }
+
+        .tech-item strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .tech-item span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* CLOSING AND FOOTER */
+
+        .closing {
+            padding: 0 0 75px;
+        }
+
+        .closing-panel {
+            padding: 45px 24px;
+            text-align: center;
+            border: 1px solid #00e69a30;
+            border-radius: 20px;
+            background:
+                radial-gradient(ellipse at top, #00e69a16, transparent 65%),
+                #0c201a;
+        }
+
+        .closing-panel h2 {
+            font-size: clamp(27px, 4vw, 40px);
+            margin-bottom: 13px;
+        }
+
+        .closing-panel p {
+            max-width: 550px;
+            margin: 0 auto 22px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        footer {
+            padding: 27px 0;
+            background: #05100d;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand {
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .footer-brand i {
+            color: var(--green);
+        }
+
+        footer p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        @media (max-width: 1050px) {
+            .navbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                justify-content: flex-start;
+            }
+
+            .hero-grid {
+                gap: 28px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .hero {
+                padding: 55px 0;
+            }
+
+            .hero-grid,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-frame {
+                height: 320px;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .section {
+                padding: 58px 0;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 10px 13px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .footer-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *, *::before, *::after {
+                transition: none !important;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
+<header>
+    <div class="container navbar">
 
-<!-- =====================================
-     NAVIGATION
-===================================== -->
-
-<nav class="navbar">
-
-    <div class="logo">
-        🌱 SmartFood
-    </div>
-
-
-    <div class="nav-links">
-
-        <a href="/">Home</a>
-
-        <a href="#dashboard">Dashboard</a>
-
-        <a href="#impact">Impact</a>
-
-        <a href="#analytics">Analytics</a>
-
-        <a href="#features">Features</a>
-
-        <a href="#food-entry">Add Food</a>
-
-        <a href="#prediction">Prediction</a>
-
-        <a href="#matching">Matching</a>
-
-        <a href="#redistribution">Redistribution</a>
-
-        <a href="#about">About</a>
-
-    </div>
-
-</nav>
-
-
-
-<!-- =====================================
-     HERO
-===================================== -->
-
-<section class="hero">
-
-    <div class="hero-text">
-
-        <h1>
-
-            Reduce Food Waste.
-
-            <span>
-                Feed More.
+        <a href="{{ url_for('home') }}" class="brand">
+            <span class="brand-icon">
+                <i class="fa-solid fa-leaf"></i>
             </span>
-
-        </h1>
-
-
-        <p>
-
-            Smart Food Reduction uses data-driven
-            demand prediction, surplus monitoring
-            and intelligent food redistribution
-            to reduce avoidable food waste.
-
-        </p>
-
-
-        <a href="#food-entry"
-           class="btn">
-
-            Get Started →
-
+            <span>
+                SmartFood
+                <small>Intelligent Sustainability</small>
+            </span>
         </a>
 
-    </div>
-
-
-    <div class="hero-card">
-
-        <h2>
-            Today's Impact 📊
-        </h2>
-
-
-        <div class="stat">
-
-            <span>
-                Food Prepared
-            </span>
-
-            <strong>
-                {{ total_prepared }} meals
-            </strong>
-
-        </div>
-
-
-        <div class="stat">
-
-            <span>
-                Food Consumed
-            </span>
-
-            <strong>
-                {{ total_consumed }} meals
-            </strong>
-
-        </div>
-
-
-        <div class="stat">
-
-            <span>
-                Surplus Detected
-            </span>
-
-            <strong>
-                {{ total_surplus }} meals
-            </strong>
-
-        </div>
-
-
-        <div class="stat">
-
-            <span>
-                Redistributed
-            </span>
-
-            <strong>
-                {{ total_redistributed }} meals
-            </strong>
-
-        </div>
-
-
-        <div class="stat">
-
-            <span>
-                Surplus Rate
-            </span>
-
-            <strong>
-                {{ reduction_rate }}%
-            </strong>
-
-        </div>
+        <nav class="nav-links" aria-label="Main navigation">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#analytics">Analytics</a>
+            <a href="#about">About</a>
+            <a href="#prediction">Prediction</a>
+            <a href="#matching">Matching</a>
+            <a href="#redistribution">Redistribution</a>
+            <a href="#add-food">Add Food</a>
+            <a href="#impact">Impact</a>
+            <a href="#features">Features</a>
+        </nav>
 
     </div>
+</header>
 
-</section>
+<main>
 
+    <!-- HERO -->
 
+    <section class="hero">
+        <div class="container hero-grid">
 
-<!-- =====================================
-     DASHBOARD
-===================================== -->
+            <div>
+                <div class="eyebrow">Technology for a sustainable future</div>
 
-<section class="dashboard"
-         id="dashboard">
+                <h1>
+                    Reduce Waste.
+                    <span>Redistribute Hope.</span>
+                </h1>
 
-    <h2>
-        📊 Impact Dashboard
-    </h2>
+                <p class="hero-description">
+                    Smart Food Reduction brings food tracking, demand prediction,
+                    recipient matching and redistribution into one platform.
+                    Make better use of surplus food with technology.
+                </p>
 
+                <div class="buttons">
+                    <a href="#add-food" class="btn btn-primary">
+                        Add Food <i class="fa-solid fa-arrow-right"></i>
+                    </a>
 
-    <p>
+                    <a href="#dashboard" class="btn btn-secondary">
+                        View Dashboard
+                    </a>
+                </div>
 
-        Track food preparation, consumption,
-        surplus and redistribution.
-
-    </p>
-
-
-    <div class="dashboard-container">
-
-
-        <div class="dashboard-card">
-
-            <div class="dashboard-icon">
-                🍱
+                <div class="hero-note">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <span>Smart planning. Responsible sharing. A greener tomorrow.</span>
+                </div>
             </div>
 
-            <h3>
-                {{ total_prepared }}
-            </h3>
+            <div class="hero-visual">
+                <div class="image-frame">
+                    <img
+                        src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1000&q=85"
+                        alt="Fresh vegetables representing sustainable food use"
+                        onerror="this.style.display='none'"
+                    >
+                </div>
 
-            <p>
-                Food Prepared
-            </p>
-
-        </div>
-
-
-        <div class="dashboard-card">
-
-            <div class="dashboard-icon">
-                🍽️
+                <div class="image-label">
+                    <strong>Every Meal Matters</strong>
+                    <span>Technology with a purpose.</span>
+                </div>
             </div>
 
-            <h3>
-                {{ total_consumed }}
-            </h3>
-
-            <p>
-                Food Consumed
-            </p>
-
         </div>
+    </section>
 
+    <!-- CAPABILITIES -->
 
-        <div class="dashboard-card">
+    <section class="mission">
+        <div class="container mission-grid">
 
-            <div class="dashboard-icon">
-                ♻️
+            <div class="mission-item">
+                <i class="fa-solid fa-chart-line"></i>
+                <div>
+                    <strong>Demand Prediction</strong>
+                    <span>Learn from previous consumption</span>
+                </div>
             </div>
 
-            <h3>
-                {{ total_surplus }}
-            </h3>
-
-            <p>
-                Surplus Food
-            </p>
-
-        </div>
-
-
-        <div class="dashboard-card">
-
-            <div class="dashboard-icon">
-                🤝
+            <div class="mission-item">
+                <i class="fa-solid fa-people-arrows-left-right"></i>
+                <div>
+                    <strong>Recipient Matching</strong>
+                    <span>Evaluate recipient capacity</span>
+                </div>
             </div>
 
-            <h3>
-                {{ total_redistributed }}
-            </h3>
-
-            <p>
-                Food Redistributed
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================
-     FOOD ANALYTICS
-===================================== -->
-
-<section class="analytics-section"
-         id="analytics">
-
-    <h2>
-        📈 Food Analytics
-    </h2>
-
-
-    <p>
-
-        Visual comparison of food preparation,
-        consumption, surplus and redistribution.
-
-    </p>
-
-
-    <div class="chart-card">
-
-        <canvas id="foodChart"></canvas>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================
-     ENVIRONMENTAL IMPACT
-===================================== -->
-
-<section class="impact-section"
-         id="impact">
-
-
-    <h2>
-        🌍 Environmental Impact
-    </h2>
-
-
-    <p>
-
-        Understand how the system can help
-        reduce unnecessary food waste and
-        improve food utilization.
-
-    </p>
-
-
-    <!-- NEW IMPACT CARDS -->
-
-    <div class="impact-container">
-
-
-        <!-- SURPLUS MEALS -->
-
-        <div class="impact-card">
-
-            <div class="impact-icon">
-                🍱
+            <div class="mission-item">
+                <i class="fa-solid fa-recycle"></i>
+                <div>
+                    <strong>Redistribution</strong>
+                    <span>Track food distribution records</span>
+                </div>
             </div>
 
-            <h3>
-                {{ total_surplus }}
-            </h3>
-
-            <p>
-                Surplus Meals Detected
-            </p>
-
         </div>
+    </section>
 
+    <!-- DASHBOARD AND IMPACT -->
 
-        <!-- MEALS SAVED -->
+    <section class="section" id="dashboard">
+        <span id="impact"></span>
 
-        <div class="impact-card">
+        <div class="container">
 
-            <div class="impact-icon">
-                ♻️
+            <div class="section-heading">
+                <div class="eyebrow">Live project dashboard</div>
+                <h2>Your Food Impact at a Glance</h2>
+                <p>
+                    These statistics use food and redistribution records
+                    retrieved by your existing Flask application.
+                </p>
             </div>
 
-            <h3>
-                {{ meals_saved }}
-            </h3>
+            <div class="grid">
 
-            <p>
-                Meals Saved
-            </p>
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Prepared</span>
+                        <i class="fa-solid fa-bowl-food"></i>
+                    </div>
+                    <strong class="stat-number">{{ total_prepared|default(0) }}</strong>
+                    <span class="stat-caption">Recorded food quantity</span>
+                </article>
 
-        </div>
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Consumed</span>
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <strong class="stat-number">{{ total_consumed|default(0) }}</strong>
+                    <span class="stat-caption">Recorded consumed quantity</span>
+                </article>
 
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Total Surplus</span>
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+                    <strong class="stat-number">{{ total_surplus|default(0) }}</strong>
+                    <span class="stat-caption">Recorded remaining food</span>
+                </article>
 
-        <!-- WASTE AVOIDED -->
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Redistributed</span>
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <strong class="stat-number">{{ total_redistributed|default(0) }}</strong>
+                    <span class="stat-caption">Quantity recorded as redistributed</span>
+                </article>
 
-        <div class="impact-card">
+                <article class="stat-card" id="analytics">
+                    <div class="stat-top">
+                        <span>Consumption Rate</span>
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <strong class="stat-number">{{ consumption_rate|default(0) }}%</strong>
+                    <span class="stat-caption">Consumed versus prepared</span>
+                </article>
 
-            <div class="impact-icon">
-                🌍
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Redistribution Rate</span>
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
+                    <strong class="stat-number">{{ redistribution_rate|default(0) }}%</strong>
+                    <span class="stat-caption">Redistributed versus recorded surplus</span>
+                </article>
+
             </div>
 
-            <h3>
-                {{ waste_avoided }}
-            </h3>
+            <div style="margin-top:24px">
+                <div class="notice {{ waste_alert_class|default('normal') }}">
+                    <i class="fa-solid fa-bell"></i>
+                    <strong>Food Alert:</strong>
+                    {{ waste_alert|default('Add food records to see alerts.') }}
+                </div>
 
-            <p>
-                Waste Avoided
-            </p>
-
-        </div>
-
-
-        <!-- REDISTRIBUTION RATE -->
-
-        <div class="impact-card">
-
-            <div class="impact-icon">
-                📊
+                <div class="notice">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <strong>Smart Recommendation:</strong>
+                    {{ recommendation|default('Add food records to receive recommendations.') }}
+                </div>
             </div>
 
-            <h3>
-                {{ redistribution_rate }}%
-            </h3>
-
-            <p>
-                Redistribution Rate
-            </p>
-
         </div>
+    </section>
 
-    </div>
+    <!-- FEATURES -->
 
+    <section class="section" id="features" style="background:#091812">
+        <div class="container">
 
-    <div class="impact-note">
-
-        <strong>
-            💡 Impact:
-        </strong>
-
-        The system identifies surplus food
-        and provides an opportunity to
-        redistribute usable food instead of
-        leaving it unused.
-
-        <br><br>
-
-        <strong>
-            ♻️ Waste Avoided:
-        </strong>
-
-        Represents surplus food recorded as
-        redistributed in this prototype.
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================
-     FOOD WASTE ALERT
-===================================== -->
-
-<section class="alert-section">
-
-    <h2>
-        🚨 Food Waste Alert
-    </h2>
-
-
-    <div class="waste-alert {{ waste_alert_class }}">
-
-        <h3>
-            Smart Monitoring
-        </h3>
-
-
-        <p>
-            {{ waste_alert }}
-        </p>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================
-     SMART RECOMMENDATION
-===================================== -->
-
-<section class="recommendation-section">
-
-    <h2>
-        💡 Smart Recommendation
-    </h2>
-
-
-    <div class="recommendation-card">
-
-        <div class="recommendation-icon">
-            🤖
-        </div>
-
-
-        <div>
-
-            <h3>
-                System Suggestion
-            </h3>
-
-
-            <p>
-                {{ recommendation }}
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================
-     FEATURES
-===================================== -->
-
-<section class="features"
-         id="features">
-
-
-    <h2>
-        How Our System Works
-    </h2>
-
-
-    <div class="feature-container">
-
-
-        <div class="feature">
-
-            <div class="icon">
-                📊
+            <div class="section-heading">
+                <div class="eyebrow">Platform capabilities</div>
+                <h2>Intelligent Food Management</h2>
+                <p>
+                    Explore the main features of the Smart Food Reduction project.
+                </p>
             </div>
 
-            <h3>
-                Demand Prediction
-            </h3>
+            <div class="grid">
 
-            <p>
+                <article class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h3>Food Tracking</h3>
+                    <p>
+                        Record prepared and consumed quantities and calculate
+                        the remaining surplus.
+                    </p>
+                    <a href="#add-food" class="text-link">
+                        Add a record <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </article>
 
-                Estimate expected food demand
-                using previous consumption data.
+                <article class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3>Demand Prediction</h3>
+                    <p>
+                        Estimate demand using previously recorded consumption
+                        for a selected food.
+                    </p>
+                    <a href="#prediction" class="text-link">
+                        Try prediction <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </article>
 
-            </p>
+                <article class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h3>Recipient Matching</h3>
+                    <p>
+                        Compare surplus quantity with recipient capacity
+                        to identify possible matches.
+                    </p>
+                    <a href="#matching" class="text-link">
+                        Find a match <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </article>
 
+            </div>
         </div>
+    </section>
 
+    <!-- SMART TOOLS -->
 
-        <div class="feature">
+    <section class="section" id="tools">
+        <div class="container">
 
-            <div class="icon">
-                🍱
+            <div class="section-heading">
+                <div class="eyebrow">Interactive workspace</div>
+                <h2>Smart Food Operations</h2>
+                <p>
+                    Use the forms below to access your existing Flask features.
+                </p>
             </div>
 
-            <h3>
-                Surplus Detection
-            </h3>
+            <div class="grid">
 
-            <p>
+                <!-- ADD FOOD -->
 
-                Track prepared and consumed food
-                to identify surplus automatically.
+                <article class="form-card" id="add-food">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
 
-            </p>
+                    <h3>Record Food</h3>
+                    <p class="form-description">
+                        Enter the prepared and consumed quantities.
+                    </p>
 
+                    <form action="{{ url_for('add_food') }}" method="POST">
+                        <div class="field">
+                            <label for="food_name">Food name</label>
+                            <input
+                                id="food_name"
+                                name="food_name"
+                                type="text"
+                                maxlength="100"
+                                placeholder="e.g. Rice"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="prepared">Quantity prepared</label>
+                            <input
+                                id="prepared"
+                                name="prepared"
+                                type="number"
+                                min="0"
+                                step="1"
+                                placeholder="e.g. 100"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="consumed">Quantity consumed</label>
+                            <input
+                                id="consumed"
+                                name="consumed"
+                                type="number"
+                                min="0"
+                                step="1"
+                                placeholder="e.g. 75"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Save Food Record <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </article>
+
+                <!-- PREDICTION -->
+
+                <article class="form-card" id="prediction">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <h3>Demand Prediction</h3>
+                    <p class="form-description">
+                        Estimate demand from previous consumption records.
+                    </p>
+
+                    <form action="{{ url_for('predict') }}" method="POST">
+                        <div class="field">
+                            <label for="prediction_food">Food name</label>
+                            <input
+                                id="prediction_food"
+                                name="food_name"
+                                type="text"
+                                maxlength="100"
+                                placeholder="Enter a recorded food name"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Predict Demand <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </button>
+                    </form>
+
+                    <p class="form-note">
+                        Predictions depend on the historical records available.
+                    </p>
+                </article>
+
+                <!-- MATCHING -->
+
+                <article class="form-card" id="matching">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-people-arrows-left-right"></i>
+                    </div>
+
+                    <h3>Recipient Matching</h3>
+                    <p class="form-description">
+                        Compare surplus quantity with recipient capacities.
+                    </p>
+
+                    <form action="{{ url_for('match') }}" method="POST">
+                        <div class="field">
+                            <label for="match_food">Food name</label>
+                            <input
+                                id="match_food"
+                                name="food_name"
+                                type="text"
+                                maxlength="100"
+                                placeholder="e.g. Rice"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="match_surplus">Available surplus</label>
+                            <input
+                                id="match_surplus"
+                                name="surplus"
+                                type="number"
+                                min="0"
+                                step="1"
+                                placeholder="e.g. 25"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Find Recipients <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </article>
+
+            </div>
         </div>
+    </section>
 
+    <!-- FOOD RECORDS -->
 
-        <div class="feature">
+    <section class="section" id="records" style="background:#091812">
+        <div class="container">
 
-            <div class="icon">
-                🤝
+            <div class="section-heading">
+                <div class="eyebrow">Stored data</div>
+                <h2>Recent Food Records</h2>
+                <p>Food entries retrieved from your SQLite database.</p>
             </div>
 
-            <h3>
-                Smart Matching
-            </h3>
-
-            <p>
-
-                Connect available surplus with
-                suitable recipient organizations.
-
-            </p>
+            {% if entries %}
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                                <th>Prepared</th>
+                                <th>Consumed</th>
+                                <th>Surplus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in entries %}
+                                <tr>
+                                    <td>{{ entry['food_name'] }}</td>
+                                    <td>{{ entry['prepared'] }}</td>
+                                    <td>{{ entry['consumed'] }}</td>
+                                    <td>{{ entry['surplus'] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <i class="fa-solid fa-box-open"></i>
+                    <p>No food records yet. Add your first record above.</p>
+                </div>
+            {% endif %}
 
         </div>
+    </section>
 
+    <!-- REDISTRIBUTION -->
 
-        <div class="feature">
+    <section class="section" id="redistribution">
+        <div class="container">
 
-            <div class="icon">
-                ♻️
+            <div class="section-heading">
+                <div class="eyebrow">Responsible sharing</div>
+                <h2>Food Redistribution</h2>
+                <p>
+                    Record redistribution for previously recorded food.
+                    Your Flask backend checks available surplus before saving.
+                </p>
             </div>
 
-            <h3>
-                Food Redistribution
-            </h3>
+            <div class="grid">
 
-            <p>
+                <article class="form-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
 
-                Record surplus food that is
-                assigned to recipient organizations.
+                    <h3>New Redistribution</h3>
+                    <p class="form-description">
+                        Enter the food, quantity and recipient.
+                    </p>
 
-            </p>
+                    <form action="{{ url_for('redistribute') }}" method="POST">
+                        <div class="field">
+                            <label for="redistribute_food">Food name</label>
+                            <input
+                                id="redistribute_food"
+                                name="food_name"
+                                type="text"
+                                maxlength="100"
+                                placeholder="Previously recorded food name"
+                                required
+                            >
+                        </div>
 
+                        <div class="field">
+                            <label for="quantity">Quantity to redistribute</label>
+                            <input
+                                id="quantity"
+                                name="quantity"
+                                type="number"
+                                min="1"
+                                step="1"
+                                placeholder="e.g. 10"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="recipient">Recipient</label>
+                            <select id="recipient" name="recipient" required>
+                                <option value="">Select a recipient</option>
+                                <option value="Local Food Bank">Local Food Bank</option>
+                                <option value="Community Shelter">Community Shelter</option>
+                                <option value="Nearby NGO">Nearby NGO</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Record Redistribution <i class="fa-solid fa-check"></i>
+                        </button>
+                    </form>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+
+                    <h3>Redistribution History</h3>
+                    <p>
+                        View saved redistribution records and recipients.
+                    </p>
+
+                    {% if redistributions %}
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Food</th>
+                                        <th>Quantity</th>
+                                        <th>Recipient</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in redistributions %}
+                                        <tr>
+                                            <td>{{ item['food_name'] }}</td>
+                                            <td>{{ item['quantity'] }}</td>
+                                            <td>{{ item['recipient'] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            No redistribution records yet.
+                        </div>
+                    {% endif %}
+                </article>
+
+            </div>
         </div>
+    </section>
 
+    <!-- ABOUT -->
 
-        <div class="feature">
+    <section class="section" id="about" style="background:#091812">
+        <div class="container">
 
-            <div class="icon">
-                🌍
+            <div class="section-heading">
+                <div class="eyebrow">About the project</div>
+                <h2>Technology with a Purpose</h2>
+                <p>
+                    Smart Food Reduction is a college innovation project
+                    designed to support better food management and reduce
+                    avoidable waste.
+                </p>
             </div>
 
-            <h3>
-                Impact Tracking
-            </h3>
+            <div class="about-grid">
+
+                <article class="about-panel">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+
+                    <h3>Our Mission</h3>
+                    <p>
+                        The project records prepared and consumed food,
+                        calculates surplus, estimates future demand from
+                        previous records, evaluates recipient capacity,
+                        and stores redistribution details.
+                    </p>
+                    <p>
+                        Its goal is to encourage responsible food planning
+                        and make surplus food easier to track and manage.
+                    </p>
+                </article>
+
+                <article class="about-panel">
+                    <h3 style="margin-bottom:22px">Technology Stack</h3>
+
+                    <div class="tech-list">
+                        <div class="tech-item">
+                            <i class="fa-solid fa-code"></i>
+                            <div>
+                                <strong>HTML and CSS</strong>
+                                <span>Website structure and Premium Technology design</span>
+                            </div>
+                        </div>
+
+                        <div class="tech-item">
+                            <i class="fa-brands fa-python"></i>
+                            <div>
+                                <strong>Python and Flask</strong>
+                                <span>Application logic and form processing</span>
+                            </div>
+                        </div>
+
+                        <div class="tech-item">
+                            <i class="fa-solid fa-database"></i>
+                            <div>
+                                <strong>SQLite</strong>
+                                <span>Persistent food and redistribution records</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
-            <p>
-
-                Monitor food usage, surplus
-                and redistribution.
-
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================
-     FOOD ENTRY
-===================================== -->
-
-<section class="food-entry"
-         id="food-entry">
-
-
-    <h2>
-        🍱 Add Food Information
-    </h2>
-
-
-    <p>
-
-        Enter today's food preparation
-        and consumption details.
-
-    </p>
-
-
-    <form action="/add-food"
-          method="POST"
-          onsubmit="return validateFoodForm()">
-
-
-        <label for="food_name">
-            Food Name
-        </label>
-
-
-        <input
-            type="text"
-            id="food_name"
-            name="food_name"
-            placeholder="Example: Rice"
-            required
-        >
-
-
-        <label for="prepared">
-            Quantity Prepared
-        </label>
-
-
-        <input
-            type="number"
-            id="prepared"
-            name="prepared"
-            placeholder="Example: 100"
-            min="0"
-            required
-            oninput="checkQuantity()"
-        >
-
-
-        <label for="consumed">
-            Quantity Consumed
-        </label>
-
-
-        <input
-            type="number"
-            id="consumed"
-            name="consumed"
-            placeholder="Example: 80"
-            min="0"
-            required
-            oninput="checkQuantity()"
-        >
-
-
-        <p id="quantity-warning"
-           style="
-               color: #842029;
-               font-weight: bold;
-               display: none;
-               margin-top: 5px;
-           ">
-
-            ⚠️ Consumed quantity cannot be greater
-            than prepared quantity.
-
-        </p>
-
-
-        <button type="submit">
-            Add Food
-        </button>
-
-    </form>
-
-</section>
-
-
-
-<!-- =====================================
-     DEMAND PREDICTION
-===================================== -->
-
-<section class="food-entry"
-         id="prediction">
-
-
-    <h2>
-        🤖 Demand Prediction
-    </h2>
-
-
-    <p>
-
-        Enter a food name to estimate the
-        quantity needed from previous
-        consumption records.
-
-    </p>
-
-
-    <form action="/predict"
-          method="POST">
-
-
-        <label for="prediction_food">
-            Food Name
-        </label>
-
-
-        <input
-            type="text"
-            id="prediction_food"
-            name="food_name"
-            placeholder="Example: Rice"
-            required
-        >
-
-
-        <button type="submit">
-            Predict Demand
-        </button>
-
-    </form>
-
-</section>
-
-
-
-<!-- =====================================
-     SMART MATCHING
-===================================== -->
-
-<section class="food-entry matching-section"
-         id="matching">
-
-
-    <h2>
-        🤝 Smart Recipient Matching
-    </h2>
-
-
-    <p>
-
-        Find suitable recipients for
-        available surplus food.
-
-    </p>
-
-
-    <form action="/match"
-          method="POST">
-
-
-        <label for="match_food">
-            Food Name
-        </label>
-
-
-        <input
-            type="text"
-            id="match_food"
-            name="food_name"
-            placeholder="Example: Rice"
-            required
-        >
-
-
-        <label for="match_surplus">
-            Surplus Quantity
-        </label>
-
-
-        <input
-            type="number"
-            id="match_surplus"
-            name="surplus"
-            placeholder="Example: 20"
-            min="0"
-            required
-        >
-
-
-        <button type="submit">
-            Find Recipients 🤝
-        </button>
-
-    </form>
-
-</section>
-
-
-
-<!-- =====================================
-     REDISTRIBUTION
-===================================== -->
-
-<section class="redistribution-section"
-         id="redistribution">
-
-
-    <h2>
-        ♻️ Redistribution Center
-    </h2>
-
-
-    <p>
-
-        Track surplus food that has been
-        assigned to recipient organizations.
-
-    </p>
-
-
-    <div class="redistribution-summary">
-
-        <div class="redistribution-total">
-
-            <div class="redistribution-icon">
-                ♻️
             </div>
-
-
-            <h3>
-                {{ total_redistributed }}
-            </h3>
-
-
-            <p>
-                Meals Redistributed
-            </p>
-
         </div>
+    </section>
 
-    </div>
+    <!-- CLOSING -->
 
+    <section class="closing">
+        <div class="container">
+            <div class="closing-panel">
+                <div class="eyebrow">Innovation with impact</div>
+                <h2>Make Every Meal Count.</h2>
+                <p>
+                    Better food planning and responsible redistribution
+                    can help reduce avoidable waste and make better use
+                    of available resources.
+                </p>
 
-
-    {% if redistributions %}
-
-        <div class="table-container">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>Food</th>
-
-                        <th>Quantity</th>
-
-                        <th>Recipient</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                    {% for item in redistributions %}
-
-                        <tr>
-
-                            <td>
-                                {{ item["food_name"] }}
-                            </td>
-
-                            <td>
-                                {{ item["quantity"] }} meals
-                            </td>
-
-                            <td>
-                                🏢 {{ item["recipient"] }}
-                            </td>
-
-                        </tr>
-
-                    {% endfor %}
-
-                </tbody>
-
-            </table>
-
+                <a href="#add-food" class="btn btn-primary">
+                    Start Using the Platform
+                    <i class="fa-solid fa-arrow-up"></i>
+                </a>
+            </div>
         </div>
+    </section>
 
-    {% else %}
-
-        <div class="redistribution-empty">
-
-            <p>
-                No food has been redistributed yet.
-            </p>
-
-            <p>
-                Add surplus food and use Smart
-                Recipient Matching to redistribute it.
-            </p>
-
-        </div>
-
-    {% endif %}
-
-</section>
-
-
-
-<!-- =====================================
-     RECENT FOOD ENTRIES
-===================================== -->
-
-<section class="entries">
-
-
-    <h2>
-        📋 Recent Food Entries
-    </h2>
-
-
-    {% if entries %}
-
-        <div class="table-container">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>Food</th>
-
-                        <th>Prepared</th>
-
-                        <th>Consumed</th>
-
-                        <th>Surplus</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                    {% for entry in entries %}
-
-                        <tr>
-
-                            <td>
-                                {{ entry["food_name"] }}
-                            </td>
-
-                            <td>
-                                {{ entry["prepared"] }}
-                            </td>
-
-                            <td>
-                                {{ entry["consumed"] }}
-                            </td>
-
-                            <td>
-                                {{ entry["surplus"] }}
-                            </td>
-
-                        </tr>
-
-                    {% endfor %}
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    {% else %}
-
-        <p>
-
-            No food entries yet.
-            Add your first entry above.
-
-        </p>
-
-    {% endif %}
-
-</section>
-
-
-
-<!-- =====================================
-     ABOUT
-===================================== -->
-
-<section class="about"
-         id="about">
-
-
-    <h2>
-        About Smart Food Reduction
-    </h2>
-
-
-    <p>
-
-        Smart Food Reduction is a food waste
-        management system designed to monitor
-        food preparation and consumption,
-        identify surplus food, estimate future
-        demand and support redistribution to
-        suitable recipient organizations.
-
-    </p>
-
-</section>
-
-
-
-<!-- =====================================
-     FOOTER
-===================================== -->
+</main>
 
 <footer>
+    <div class="container footer-inner">
+        <div class="footer-brand">
+            <i class="fa-solid fa-leaf"></i>
+            Smart Food Reduction
+        </div>
 
-    <p>
-
-        🌱 Smart Food Reduction |
-
-        Reducing Waste, Creating Impact
-
-    </p>
-
+        <p>A college innovation project for a sustainable future.</p>
+        <p>© 2026 Smart Food Reduction</p>
+    </div>
 </footer>
 
-
-
-<!-- =====================================
-     FOOD QUANTITY VALIDATION
-===================================== -->
-
-<script>
-
-function checkQuantity() {
-
-    const prepared =
-        Number(document.getElementById("prepared").value);
-
-    const consumed =
-        Number(document.getElementById("consumed").value);
-
-    const warning =
-        document.getElementById("quantity-warning");
-
-
-    if (consumed > prepared && prepared >= 0) {
-
-        warning.style.display = "block";
-
-    } else {
-
-        warning.style.display = "none";
-
-    }
-
-}
-
-
-
-function validateFoodForm() {
-
-    const prepared =
-        Number(document.getElementById("prepared").value);
-
-    const consumed =
-        Number(document.getElementById("consumed").value);
-
-
-    if (consumed > prepared) {
-
-        alert(
-            "Consumed quantity cannot be greater than prepared quantity."
-        );
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-</script>
-
-
-
-<!-- =====================================
-     CHART.JS
-===================================== -->
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-<script>
-
-const chartCanvas =
-    document.getElementById("foodChart");
-
-
-if (chartCanvas) {
-
-    new Chart(chartCanvas, {
-
-        type: "bar",
-
-        data: {
-
-            labels: [
-                "Prepared",
-                "Consumed",
-                "Surplus",
-                "Redistributed"
-            ],
-
-            datasets: [{
-
-                label: "Meals",
-
-                data: [
-                    {{ total_prepared }},
-                    {{ total_consumed }},
-                    {{ total_surplus }},
-                    {{ total_redistributed }}
-                ]
-
-            }]
-
-        },
-
-        options: {
-
-            responsive: true,
-
-            plugins: {
-
-                legend: {
-                    display: true
-                }
-
-            },
-
-            scales: {
-
-                y: {
-
-                    beginAtZero: true,
-
-                    title: {
-
-                        display: true,
-
-                        text: "Number of Meals"
-
-                    }
-
-                },
-
-                x: {
-
-                    title: {
-
-                        display: true,
-
-                        text: "Food Statistics"
-
-                    }
-
-                }
-
-            }
-
-        }
-
-    });
-
-}
-
-</script>
-
-
 </body>
-
 </html>
